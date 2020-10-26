@@ -29,7 +29,7 @@ class VersionedEndpoint:
 		"""
 		self.args = args
 		self.kwargs = kwargs
-		request = self.initialize_request(request, *args, **kwargs)._request
+		request = self.initialize_request(request, *args, **kwargs)
 		self.request = request
 		self.headers = self.default_response_headers  # deprecate?
 
@@ -48,7 +48,7 @@ class VersionedEndpoint:
 				version_keys = self.versions.keys()
 				latest_version = max(version_keys)
 				version_class = self.versions.get(latest_version)
-			return self.to_class(version_class).as_view()(request, *args, **kwargs)
+			return self.to_class(version_class).as_view()(request._request, *args, **kwargs)
 
 		except Exception as exc:
 			response = self.handle_exception(exc)
