@@ -30,7 +30,7 @@ class VersionedEndpoint:
 		self.args = args
 		self.kwargs = kwargs
 		request = self.initialize_request(request, *args, **kwargs)
-		self.request = request
+		self.request = request._request
 		self.headers = self.default_response_headers  # deprecate?
 
 		try:
